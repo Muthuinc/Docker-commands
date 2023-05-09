@@ -2,10 +2,25 @@
 sudo apt update - to update latest apt
 sudo apt install docker.io - y ---- to install docker
 
+#once installed docker add the current user to the docker group unless "sudo" command must have to be used before every docker command
+
+sudo usermod -aG docker (current user)
+run "whoami" to know the current user name
+
 #Create docker file -- Docker file has human readable instructions which is used to build docker image
 
 #Create docker image
-docker build -t (name of the dockerimage : tag name)
+
+docker build -t (name of the dockerimage : tag name) . 
+
+# . is placed at the end to specify the file path in the current working directory
+
+#unless use flag -f to specify the path of the dockerfile
+
+#command to remove docker image
+docker images # this will show all the images present in the docker
+docker rmi (image name or image ID) 
+
 
 #Create docker container
 docker run -d -p 80:80 --name (name of the docker container)  ----  -d means container run in detached mode (runs after exiting), -p is used to specify the port number only for web based applications
@@ -17,3 +32,10 @@ docker ps  -a list all the container in the system (regardless of running condit
 
 docker stop (file name or container id)
 docker rm (file name or container id)
+
+docker exec -it (container name) sh #to go inside the particular container file as it runs in interactive mode
+
+#docker compose - it is useful to start multiple services at the same time. (eg: microservices - where each services exchange information themselves) ' it is a yaml file' indendation in each line is also important
+
+docker-compose up -d #to start the services - it can be used with or without creating docker image but docker file is important in addition to docker-compose file ' there should be one dockerfile and one docker-compose file'
+
